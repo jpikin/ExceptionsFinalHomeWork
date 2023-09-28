@@ -14,13 +14,23 @@ public class App {
 
     }
 
-    public static <T> List<List> getPersonInfo() {
+    /**
+     * @apiNote Принимает строку из консоли. Вызывает методы создания массива и сортировки.
+     * @return возвращает отсортированный двухмерный список.
+     */
+    public static List<List> getPersonInfo() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         scanner.close();
         return getSortedList(makeListData(str));
     }
 
+    /**
+     *
+     * @param str Принимаем строку из консоли.
+     *            Проверяем строку на количество введенных данных
+     * @return Возвращает массив.
+     */
     public static List<String> makeListData(String str) {
         String[] strArray = str.split(" ");
         CheckData.checkArrayLength(strArray);
@@ -29,15 +39,21 @@ public class App {
         return lst;
     }
 
+    /**
+     * @apiNote Создает двухмерный список, вызывает из класса ChekData методы проверки данных.
+     * @param mainList принимает массив, из которого создает двухмерный List
+     * @return возвращаем отсортированный двухмерный список
+     */
     public static List<List> getSortedList(List<String> mainList) {
-        boolean flagNum = false;
-        boolean flagDot = false;
-        List<List> sortedList = new ArrayList<List>();
+
+        List<List> sortedList = new ArrayList<>();
         List nameList = new ArrayList<>();
         List dateList = new ArrayList<>();
         List genderList = new ArrayList<>();
         List phoneList = new ArrayList<>();
         for (String s : mainList) {
+            boolean flagNum = false;
+            boolean flagDot = false;
             if (s.length() == 1) {
                 CheckData.checkGender(s.toLowerCase());
                 genderList.add(s);
