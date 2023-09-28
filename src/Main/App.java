@@ -9,11 +9,12 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        List<List<String>> personLst = getPersonInfo();
-        System.out.println(personLst);
+        List<List> personLst = getPersonInfo();
+
+
     }
 
-    public static List<List<String>> getPersonInfo() {
+    public static <T> List<List> getPersonInfo() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         scanner.close();
@@ -21,32 +22,35 @@ public class App {
     }
 
     public static List<String> makeListData(String str) {
-        CheckData checkData = new CheckData();
         String[] strArray = str.split(" ");
-        checkData.checkArrayLength(strArray);
+        CheckData.checkArrayLength(strArray);
         List<String> lst = new ArrayList<>();
         lst.addAll(Arrays.asList(strArray));
         return lst;
     }
 
-    public static List<List<String>> getSortedList(List<String> mainList) {
+    public static List<List> getSortedList(List<String> mainList) {
         boolean flagNum = false;
         boolean flagDot = false;
-        List<List<String>> sortedList = new ArrayList<List<String>>();
-        List<String> nameList = new ArrayList<>();
-        List<String> dateList = new ArrayList<>();
-        List<String> genderList = new ArrayList<>();
-        List<String> phoneList = new ArrayList<>();
+        List<List> sortedList = new ArrayList<List>();
+        List nameList = new ArrayList<>();
+        List dateList = new ArrayList<>();
+        List genderList = new ArrayList<>();
+        List phoneList = new ArrayList<>();
         for (String s : mainList) {
             if (s.length() == 1) {
+                CheckData.checkGender(s.toLowerCase());
                 genderList.add(s);
             } else {
                 for (char ch : s.toCharArray()) {
                     if (Character.isDigit(ch)) flagNum = true;
                     if (s.contains(".")) flagDot = true;
                 }
-                if (flagDot && flagNum) dateList.add(s);
-                if (!flagDot && flagNum) phoneList.add(s);
+                if (flagDot && flagNum) {
+                    CheckData.checkDateBirth(s);
+                    dateList.add(s);
+                }
+                if (!flagDot && flagNum) phoneList.add(Integer.parseInt(s));
                 if (!flagDot && !flagNum) nameList.add(s);
             }
         }
