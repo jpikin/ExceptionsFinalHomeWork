@@ -1,23 +1,15 @@
-package Main;
+package Persons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class App {
     public static void main(String[] args) {
 
-        List<List> personLst = getPersonInfo();
-
-
+        Person newPerson = new Person(getPersonInfo());
     }
-
-    /**
-     * @apiNote Принимает строку из консоли. Вызывает методы создания массива и сортировки.
-     * @return возвращает отсортированный двухмерный список.
-     */
     public static List<List> getPersonInfo() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
@@ -25,12 +17,6 @@ public class App {
         return getSortedList(makeListData(str));
     }
 
-    /**
-     *
-     * @param str Принимаем строку из консоли.
-     *            Проверяем строку на количество введенных данных
-     * @return Возвращает массив.
-     */
     public static List<String> makeListData(String str) {
         String[] strArray = str.split(" ");
         CheckData.checkArrayLength(strArray);
@@ -38,12 +24,6 @@ public class App {
         lst.addAll(Arrays.asList(strArray));
         return lst;
     }
-
-    /**
-     * @apiNote Создает двухмерный список, вызывает из класса ChekData методы проверки данных.
-     * @param mainList принимает массив, из которого создает двухмерный List
-     * @return возвращаем отсортированный двухмерный список
-     */
     public static List<List> getSortedList(List<String> mainList) {
 
         List<List> sortedList = new ArrayList<>();
@@ -55,7 +35,7 @@ public class App {
             boolean flagNum = false;
             boolean flagDot = false;
             if (s.length() == 1) {
-                CheckData.checkGender(s.toLowerCase());
+                Main.CheckData.checkGender(s.toLowerCase());
                 genderList.add(s);
             } else {
                 for (char ch : s.toCharArray()) {
@@ -64,12 +44,12 @@ public class App {
 
                 }
                 if (flagDot && flagNum) {
-                    CheckData.checkDateBirth(s);
+                    Main.CheckData.checkDateBirth(s);
                     dateList.add(s);
 
                 }
                 if (!flagDot && flagNum){
-                    CheckData.checkPhone(s);
+                    Main.CheckData.checkPhone(s);
                     phoneList.add(Long.parseLong(s));
                 }
                 if (!flagDot && !flagNum) nameList.add(s);
@@ -82,7 +62,5 @@ public class App {
 
         return sortedList;
     }
-
-
 
 }

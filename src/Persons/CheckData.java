@@ -1,11 +1,6 @@
-package Main;
+package Persons;
 
 public class CheckData {
-    /**
-     * Провеяем правильное количество введенных данных
-     *
-     * @param strArray Массив из строки, введенной в консоль.
-     */
     public static void checkArrayLength(String[] strArray) {
         if (strArray.length < 6) {
             throw new RuntimeException("Количество введенных данных меньше, чем необходимо");
@@ -13,7 +8,6 @@ public class CheckData {
             throw new RuntimeException("Количество введенных данных больше, чем необходимо");
         }
     }
-
     public static void checkDateBirth(String date) {
         String[] dateArray = date.split("\\.");
         if (dateArray[2].length() != 4)
