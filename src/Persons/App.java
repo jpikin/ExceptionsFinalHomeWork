@@ -1,6 +1,6 @@
 package Persons;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +40,7 @@ public class App {
             boolean flagNum = false;
             boolean flagDot = false;
             if (s.length() == 1) {
-                Main.CheckData.checkGender(s.toLowerCase());
+                CheckData.checkGender(s.toLowerCase());
                 genderList.add(s);
             } else {
                 for (char ch : s.toCharArray()) {
@@ -49,12 +49,12 @@ public class App {
 
                 }
                 if (flagDot && flagNum) {
-                    Main.CheckData.checkDateBirth(s);
+                    CheckData.checkDateBirth(s);
                     dateList.add(s);
 
                 }
                 if (!flagDot && flagNum){
-                    Main.CheckData.checkPhone(s);
+                    CheckData.checkPhone(s);
                     phoneList.add(Long.parseLong(s));
                 }
                 if (!flagDot && !flagNum) nameList.add(s);
