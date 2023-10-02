@@ -11,7 +11,7 @@ public class App {
 
         Person newPerson = new Person(getPersonInfo());
         FilePersons filePersons = new FilePersons();
-
+        filePersons.checkListPersons(filePersons.getListPersons(),newPerson);
     }
     public static List<List> getPersonInfo() {
         Scanner scanner = new Scanner(System.in);

@@ -9,6 +9,9 @@ public class FilePersons {
     public FilePersons() throws IOException {
         listPersons = readListPersons();
     }
+    public List getListPersons(){
+        return listPersons;
+    }
 
     public List readListPersons() throws IOException {
         try(FileReader reader = new FileReader("listPersons.txt"))
@@ -23,10 +26,12 @@ public class FilePersons {
         return listPersons;
     }
 
-    public void checkListPersons(List<List> personLst, Person person){
-        String name = (String) personLst.get(0).get(0);
+    public void checkListPersons(List personLst, Person person){
+        String name = person.getLastName();
+        boolean flag = false;
         for (Object s: listPersons) {
-            if (s.equals(name))addNewPersonToFile(personLst, person);
+            if (s.equals(name)) flag = true;
+            if(flag) addNewPersonToFile(personLst, person);
             else createNewFilePerson(personLst, person);
         }
     }
