@@ -11,8 +11,8 @@ public class Person {
     private char gender;
 
     public Person(List<List> inputString){
-        name = (String) inputString.get(0).get(0);
-        lastName = (String) inputString.get(0).get(1);
+        name = (String) inputString.get(0).get(1);
+        lastName = (String) inputString.get(0).get(0);
         patronymic = (String) inputString.get(0).get(2);
         date = (String) inputString.get(1).get(0);
         phone = (Long) inputString.get(2).get(0);
@@ -22,5 +22,9 @@ public class Person {
     }
     public String getLastName(){
         return lastName;
+    }
+    public String getAllPersonInfo(){
+        return lastName + " " + name + " " + " " + patronymic + " "
+                + date + " " + phone + " " + gender;
     }
 }
