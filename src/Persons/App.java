@@ -1,14 +1,17 @@
 package Persons;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Person newPerson = new Person(getPersonInfo());
+        FilePersons filePersons = new FilePersons();
+
     }
     public static List<List> getPersonInfo() {
         Scanner scanner = new Scanner(System.in);

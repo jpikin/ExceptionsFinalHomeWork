@@ -1,34 +1,54 @@
 package Persons;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.List;
 
 public class FilePersons {
     private List listPersons;
-    public void readListPersons() throws FileNotFoundException {
-        File newFile = new File("listPersons.txt");
-        try {
-            FileInputStream fileInputStream = new FileInputStream(newFile);
+
+    public FilePersons() throws IOException {
+        listPersons = readListPersons();
+    }
+
+    public List readListPersons() throws IOException {
+        try(FileReader reader = new FileReader("listPersons.txt"))
+        {
+            int c;
+            while((c=reader.read())!=-1){
+                listPersons.add((char)c);
+            }
         } catch (FileNotFoundException ex){
             throw new FileNotFoundException("Файл не найден");
         }
-        byte [] buffer = new byte[1024];
-
-
+        return listPersons;
     }
-    public void checkListPersons(List<List> personLst){
+
+    public void checkListPersons(List<List> personLst, Person person){
         String name = (String) personLst.get(0).get(0);
         for (Object s: listPersons) {
-            if (s.equals(name))addNewPersonToFile(personLst);
-            else createNewFilePerson(personLst);
+            if (s.equals(name))addNewPersonToFile(personLst, person);
+            else createNewFilePerson(personLst, person);
         }
     }
-    public void createNewFilePerson(List<List> personLst) {
+    public void createNewFilePerson(List<List> personLst, Person person) {
 
+        try(FileWriter writer = new FileWriter((String) personLst.get(0).get(0), false))
+        {
+            // запись всей строки
+            String text = "Hello Gold!";
+            writer.write(text);
+            // запись по символам
+            writer.append('\n');
+            writer.append('E');
+
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
     }
-    public void addNewPersonToFile(List<List> personLst){
+    public void addNewPersonToFile(List<List> personLst, Person person){
 
     }
 }
