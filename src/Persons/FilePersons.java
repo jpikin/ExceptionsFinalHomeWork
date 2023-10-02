@@ -1,18 +1,9 @@
 package Persons;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilePersons {
-
-
-    public FilePersons() throws IOException {
-
-    }
-
-
-    public void createNewFilePerson(Person person) {
+     public void createNewFilePerson(Person person) {
 
         try (FileWriter writer = new FileWriter(person.getLastName() + ".txt", true)) {
             String text = person.getAllPersonInfo()+"\n";
